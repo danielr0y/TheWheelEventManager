@@ -1,0 +1,112 @@
+@model EventViewModel
+
+<section>
+    <h4><a href="#" class="text-decoration-none text-muted">@Model.Category</a></h4>
+</section>
+<section class="mb-3">@Model.Description</section>
+<section>
+    <header class="row mb-3">
+        <h2 class="col">Dates and times</h2>
+    </header>
+    <div class="row mb-3">
+        <div class="col-sm">
+            <p class="mb-1">@Model.DateRange</p>
+        </div>
+        <div class="col-sm">
+            <p class="mb-1">@Model.TimeRange</p>
+        </div>
+        <div class="col-sm">
+            <p>@string.Format("From: ${0}", Model.LowestPrice)</p>
+        </div>
+        <div class="col-sm-auto my-auto">
+            @if ( ! Model.IsUpcoming)
+            {
+                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                        disabled>@Model.EventStatus</button>
+            }
+            else if (Model.IsAuthenticated)
+            {
+                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                        data-bs-toggle="modal" data-bs-target="#book">Book now</button>
+            }
+            else
+            {
+                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                        data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="You must be logged in to book tickets">Book now</button>
+            }
+        </div>
+    </div>
+    @if (Model.IsAuthenticated)
+    {
+        <div id="book" class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-lg">
+                <form class="modal-content" method="POST" action="@Url.Action("Book", "Events")">
+                    <div class="modal-header">
+                        <h3 id="staticBackdropLabel" class="modal-title">Book your tickets to @Model.Name</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <fieldset class="row mb-3 g-2">
+                            <legend class="">Passengers and Gondolas</legend>
+                            <span class="">Up to 6 passengers may ride together in one gondola. You may, however, reserve as many extra gondolas for your group as you please.</span>
+
+                            <div class="col text-end">
+                                <label for="people">Number of Passengers</label>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn-group counter">
+                                    <button type="button" disabled
+                                            class="btn btn-success rounded-pill rounded-end minus">-</button>
+                                    <input id="people" type="number" min="1" max="252" value="1"
+                                           class="rounded-0 border-success border-start-0 border-end-0 form-control text-center shadow-none" />
+                                    <button type="button"
+                                            class="btn btn-success rounded-pill rounded-start plus">+</button>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col text-end">
+                                <label for="qty">Number of Gondolas</label>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn-group counter">
+                                    <button type="button" class="btn btn-success rounded-pill rounded-end minus" disabled>-</button>
+                                    <input id="qty" type="number" name="qty" value="1" min="1" max="42" step="1" required
+                                           class="rounded-0 border-success border-start-0 border-end-0 form-control text-center shadow-none">
+                                    <button type="button" class="btn btn-success rounded-pill rounded-start plus" disabled>+</button>
+                                </div>
+                            </div>
+                            <div id="remainingWarning" class="w-100 text-end"></div>
+                            <div class="col my-auto text-end">
+                                <label for="price">Price</label>
+                            </div>
+                            <div class="col-auto">
+                                <div class="btn-group counter">
+                                    <span class="btn btn-success rounded-pill rounded-end">$</span>
+                                    <input id="price" type="number" value="0" min="0" step="1" readonly
+                                           class="rounded-0 border-success border-start-0 border-end-0 form-control text-center shadow-none bg-white">
+                                    <span class="btn btn-success rounded-pill rounded-start">.00</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-5" data-bs-dismiss="modal">Cancel</button>
+                        <input id="submit" type="submit" name="submit" value="Book now" class="btn btn-success rounded-pill px-5">
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+</section>
+@section Scripts
+{
+    <script>
+        (function(){
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        })()
+    </script>
+}

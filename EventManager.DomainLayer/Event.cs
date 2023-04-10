@@ -2,16 +2,6 @@
 
 public class Event
 {
-    public int Id { get; }
-    public string Name { get; }
-    public string Excerpt { get; }
-    public string Description { get; }
-    public string Category { get; }
-    public Status Status { get; }
-    // public IEnumerable<Ticket> Tickets { get; }
-    // public IEnumerable<Review> Reviews { get; }
-    public string ImageURL { get; }
-
     public Event(
         int id = 123,
         Status status = Status.Upcoming,
@@ -34,4 +24,17 @@ public class Event
         // Reviews = reviews;
         ImageURL = imageURL;
     }
+
+    public int Id { get; }
+    public string Name { get; }
+    public string Excerpt { get; }
+    public string Description { get; }
+    public string Category { get; }
+    public Status Status { get; }
+    // public IEnumerable<Ticket> Tickets { get; }
+    // public IEnumerable<Review> Reviews { get; }
+    public string ImageURL { get; }
+    public string DateRange => "not yet implemented";
+    public string TimeRange => "not yet implemented";
+    public string LowestPrice => "not yet implemented";
 }

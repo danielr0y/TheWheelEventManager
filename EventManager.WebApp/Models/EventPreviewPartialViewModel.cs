@@ -11,16 +11,16 @@ public class EventPreviewPartialViewModel
 
         Id = Event.Id;
         Name = Event.Name;
-        DateRange = "not implemented yet";
-        TimeRange = "not implemented yet";
+        DateRange = Event.DateRange;
+        TimeRange = Event.TimeRange;
         Excerpt = Event.Excerpt;
         EventStatus = Event.Status.ToString();
         UIColor = UIService.GetColorStringByStatus(Event.Status);
-        LowestPrice = "not implemented yet";
+        LowestPrice = Event.LowestPrice;
         ButtonText = isUpcoming ? "View Event" : Event.Status.ToString();
         ImageURL = $"/images/{Event.ImageURL}";
     }
-    
+
     public int Id { get; }
     public string Name { get; }
     public string DateRange { get; }
@@ -31,5 +31,4 @@ public class EventPreviewPartialViewModel
     public string ButtonText { get; }
     public string LowestPrice { get; }
     public string ImageURL { get; }
-
 }

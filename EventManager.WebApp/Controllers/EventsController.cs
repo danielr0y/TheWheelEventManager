@@ -22,4 +22,11 @@ public class EventsController : Controller
                     "All Events",
                     _eventService.AllEvents.Select( Event => new EventPreviewPartialViewModel(Event) ))));
     }
+
+    public IActionResult Event(int id)
+    {
+        return View(
+            new EventViewModel(
+                _eventService.GetEvent(id)));
+    }
 }
