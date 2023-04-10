@@ -28,6 +28,12 @@ public class EventManagerControllerActivator : IControllerActivator
                 return new HomeController(
                     new EventService(
                         new TempEventRepository()));
+
+            case nameof(EventsController):
+                return new EventsController(
+                    new EventService(
+                        new TempEventRepository()));
+
             default:
                 throw new InvalidOperationException($"Unknown controller {type}.");
         }

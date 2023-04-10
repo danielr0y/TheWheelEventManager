@@ -22,4 +22,5 @@ public class TempEventRepository : IEventRepository
 
     public IEnumerable<Event> UpcomingEvents => _events.Where( Event => Event.Status == Status.Upcoming ).ToList();
     public IEnumerable<Event> CancelledEvents => _events.Where( Event => Event.Status == Status.Cancelled ).ToList();
+    public IEnumerable<Event> AllEvents => _events;
 }

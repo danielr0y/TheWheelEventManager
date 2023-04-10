@@ -1,13 +1,12 @@
 namespace WebApp.Models;
 
-public class HomeViewModel
+public class AllEventsViewModel
 {
-    public HomeViewModel(
-        // ILayoutViewModel layoutViewModel,
-        // SearchPartialViewModel search,
+    public AllEventsViewModel(
         string heading,
-        EventsPartialViewModel upcomingEvents,
-        EventsPartialViewModel cancelledEvents
+        // ILayoutViewModel layoutViewModel,
+        // SearchPartialViewModel searchPartialViewModel,
+        EventsPartialViewModel events
     )
     {
         // IsAuthenticated = layoutViewModel.IsAuthenticated;
@@ -15,22 +14,22 @@ public class HomeViewModel
         // Messages = layoutViewModel.Messages;
         // NumberOfMessages = layoutViewModel.NumberOfMessages;
         // LoginForm = layoutViewModel.LoginForm;
-        // Search = search;
+        // SearchPartialViewModel = searchPartialViewModel;
 
         Heading = heading;
-        UpcomingEvents = upcomingEvents;
-        CancelledEvents = cancelledEvents;
+        Events = events;
     }
-
+    // parent template items
     // public bool IsAuthenticated { get; }
     // public bool IsAdmin { get; }
     // public IEnumerable<MessageViewModel> Messages { get; }
     // public int NumberOfMessages { get; }
     // public LoginFormPartialViewModel LoginForm { get; }
-    // public SearchPartialViewModel Search { get; }
+
+    // search box
+    // public SearchPartialViewModel SearchPartialViewModel { get; }
 
     public string Heading { get; }
-    // the events
-    public EventsPartialViewModel UpcomingEvents { get; }
-    public EventsPartialViewModel CancelledEvents { get; }
+    // events
+    public EventsPartialViewModel Events { get; }
 }

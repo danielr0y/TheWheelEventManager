@@ -17,4 +17,5 @@ public class EventService : IWebAppEventService
 
     public IEnumerable<Event> UpcomingEvents => _eventRepository.UpcomingEvents;
     public IEnumerable<Event> CancelledEvents => _eventRepository.CancelledEvents;
+    public IEnumerable<Event> AllEvents => _eventRepository.AllEvents;
 }

@@ -21,4 +21,5 @@ public interface IWebAppEventService
 {
     IEnumerable<Event> UpcomingEvents { get; }
     IEnumerable<Event> CancelledEvents { get; }
+    IEnumerable<Event> AllEvents { get; }
 }
