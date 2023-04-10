@@ -1,3 +1,4 @@
+using EventManager.DataLayer;
 using EventManager.DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -24,7 +25,9 @@ public class EventManagerControllerActivator : IControllerActivator
         switch (type.Name)
         {
             case nameof(HomeController):
-                return new HomeController(new EventService());
+                return new HomeController(
+                    new EventService(
+                        new TempEventRepository()));
             default:
                 throw new InvalidOperationException($"Unknown controller {type}.");
         }

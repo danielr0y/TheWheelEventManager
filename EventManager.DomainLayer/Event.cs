@@ -14,11 +14,11 @@ public class Event
 
     public Event(
         int id = 123,
+        Status status = Status.Upcoming,
         string name = "Name",
         string excerpt = "Excerpt",
         string description = "Description",
         string category = "Category",
-        Status status = Status.Upcoming,
         // IEnumerable<Tickets> tickets = Array.Empty<Ticket>(),
         // IEnumerable<Reviews> reviews = Array.Empty<Ticket>(),
         string imageURL = "ImageURL"
