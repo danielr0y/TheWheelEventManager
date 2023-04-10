@@ -16,22 +16,22 @@
             <p class="mb-1">@Model.TimeRange</p>
         </div>
         <div class="col-sm">
-            <p>@string.Format("From: ${0}", Model.LowestPrice)</p>
+            <p>@($"From: ${Model.LowestPrice}")</p>
         </div>
         <div class="col-sm-auto my-auto">
             @if ( ! Model.IsUpcoming)
             {
-                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                <button type="button" class="btn @($"btn-outline-{Model.UIColor}") rounded-pill px-5"
                         disabled>@Model.EventStatus</button>
             }
             else if (Model.IsAuthenticated)
             {
-                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                <button type="button" class="btn @($"btn-outline-{Model.UIColor}") rounded-pill px-5"
                         data-bs-toggle="modal" data-bs-target="#book">Book now</button>
             }
             else
             {
-                <button type="button" class="btn @string.Format("btn-outline-{0}", Model.UIColor) rounded-pill px-5"
+                <button type="button" class="btn @($"btn-outline-{Model.UIColor}") rounded-pill px-5"
                         data-bs-toggle="tooltip" data-bs-placement="top"
                         title="You must be logged in to book tickets">Book now</button>
             }
@@ -47,6 +47,43 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
+                        <fieldset class="row @($"row-cols-{Model.TicketTable.Width}") mb-3 btn-group g-2 gx-lg-5">
+                            <legend class="col-12 col-lg">Dates and times</legend>
+                            <span class="col-12 col-lg-auto my-auto">Prices listed are per gondola. Max 6 people</span>
+                            <div class="w-100"></div>
+                            <div class="col"></div>
+                            @foreach (TicketTableTimeCellViewModel time in @Model.TicketTable.TimeRow.Times)
+                            {
+                                <div class="col">
+                                    <label class="btn btn-light rounded-pill w-100">@time.Time</label>
+                                </div>
+                            }
+                            @foreach (TicketTableDateRowViewModel dateRow in @Model.TicketTable.DateRows)
+                            {
+                                <div class="col">
+                                    <label class="btn btn-light rounded-pill w-100">@dateRow.Date</label>
+                                </div>
+                                @foreach (TicketTableTicketCellViewModel ticket in @dateRow.Tickets)
+                                {
+                                    <div class="col">
+                                        @if (ticket.Remaining <= 0)
+                                        {
+                                            <label class="btn btn-outline-muted rounded-pill w-100">
+                                                @($"${ticket.Price}")
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <input id="@($"ticket-{ticket.Id}")" class="btn-check"
+                                                   type="radio" name="ticket" value="@ticket.Id"
+                                                   data-price="@ticket.Price" data-remaining="@ticket.Remaining">
+                                            <label for="@($"ticket-{ticket.Id}")"
+                                                   class="btn btn-outline-success rounded-pill w-100">@($"${ticket.Price}")</label>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </fieldset>
                         <fieldset class="row mb-3 g-2">
                             <legend class="">Passengers and Gondolas</legend>
                             <span class="">Up to 6 passengers may ride together in one gondola. You may, however, reserve as many extra gondolas for your group as you please.</span>

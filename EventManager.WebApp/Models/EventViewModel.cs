@@ -6,8 +6,8 @@ public class EventViewModel
 {
     public EventViewModel(
         // ILayoutViewModel layoutViewModel,
-        Event Event
-        // TicketTableViewModel ticketTable
+        Event Event,
+        TicketTableViewModel ticketTable
         // IEnumerable<ReviewPartialViewModel> reviews
     )
     {
@@ -30,7 +30,7 @@ public class EventViewModel
         IsUpcoming = (Event.Status == Status.Upcoming);
         UIColor = UIService.GetColorStringByStatus(Event.Status);
         ImageURL = $"/images/{Event.ImageURL}";
-        // TicketTable = ticketTable;
+        TicketTable = ticketTable;
         // Reviews = reviews;
         // NumberOfReviews = Reviews.Count();
     }
@@ -53,7 +53,7 @@ public class EventViewModel
     public bool IsUpcoming { get; }
     public string UIColor { get; }
     public string ImageURL { get; }
-    // public TicketTableViewModel TicketTable { get; }
+    public TicketTableViewModel TicketTable { get; }
     // public IEnumerable<ReviewPartialViewModel> Reviews { get; }
     // public int NumberOfReviews { get; }
 }

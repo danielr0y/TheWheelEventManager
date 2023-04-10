@@ -3,14 +3,14 @@
 public class Event
 {
     public Event(
-        int id = 123,
-        Status status = Status.Upcoming,
+        int id,
+        Status status,
         string name = "Name",
         string excerpt = "Excerpt",
         string description = "Description",
         string category = "Category",
-        // IEnumerable<Tickets> tickets = Array.Empty<Ticket>(),
-        // IEnumerable<Reviews> reviews = Array.Empty<Ticket>(),
+        // IEnumerable<Ticket> tickets,
+        // IEnumerable<Review> reviews,
         string imageURL = "ImageURL"
     )
     {
@@ -31,8 +31,8 @@ public class Event
     public string Description { get; }
     public string Category { get; }
     public Status Status { get; }
-    // public IEnumerable<Ticket> Tickets { get; }
-    // public IEnumerable<Review> Reviews { get; }
+    // public IEnumerable<Ticket> Tickets => _ticketService.getTicketsByEvent(Id);
+    // public IEnumerable<Review> Reviews => _reviewService.getReviewsByEvent(Id);
     public string ImageURL { get; }
     public string DateRange => "not yet implemented";
     public string TimeRange => "not yet implemented";

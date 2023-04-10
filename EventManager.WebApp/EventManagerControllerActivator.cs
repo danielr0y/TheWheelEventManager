@@ -32,7 +32,9 @@ public class EventManagerControllerActivator : IControllerActivator
             case nameof(EventsController):
                 return new EventsController(
                     new EventService(
-                        new TempEventRepository()));
+                        new TempEventRepository()),
+                    new TicketService(
+                        new TempTicketRepository()));
 
             default:
                 throw new InvalidOperationException($"Unknown controller {type}.");
