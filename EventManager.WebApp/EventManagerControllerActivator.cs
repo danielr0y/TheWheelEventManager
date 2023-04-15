@@ -34,7 +34,12 @@ public class EventManagerControllerActivator : IControllerActivator
                     new EventService(
                         new TempEventRepository()),
                     new TicketService(
-                        new TempTicketRepository()));
+                        new TempTicketRepository()),
+                    new BookingService(
+                        new TempBookingRepository()),
+                    new CustomerService(
+                        new TempUserRepository()),
+                    new TempUserContext());
 
             default:
                 throw new InvalidOperationException($"Unknown controller {type}.");

@@ -25,4 +25,5 @@ public class TicketService : IWebAppTicketService
         group ticket by DateOnly.FromDateTime(ticket.DateTime);
 
     public IEnumerable<Ticket> GetTickets(Event Event) => _repository.GetTickets(Event);
+    public Ticket GetTicket(int id) => _repository.GetTicket(id);
 }
